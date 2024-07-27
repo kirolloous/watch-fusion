@@ -8,9 +8,10 @@ export default {
   ],
   theme: {
     extend: {},
-    colors:{
-      "textPrimary":"#c79e9b"
-    }
+    fontFamily: {
+      headerTitle: "Bodoni Moda SC",
+      productTitle: "Allerta Stencil",
+    },
   },
   darkMode: "class",
   plugins: [nextui()],

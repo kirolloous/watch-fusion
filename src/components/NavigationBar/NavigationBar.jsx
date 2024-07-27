@@ -1,49 +1,70 @@
-import { Badge } from "@nextui-org/react";
-import { CiHeart, CiMenuBurger } from "react-icons/ci";
-import { MdOutlineShoppingBag } from "react-icons/md";
-import { NavLink } from "react-bootstrap";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+  Badge,
+} from "@nextui-org/react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Settings from "./Settings/Settings";
-import "./NavigationBar.css";
+import { CiHeart } from "react-icons/ci";
+import { LiaShoppingBagSolid } from "react-icons/lia";
 const NavigationBar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const handleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-  console.log("menu ===", isOpen);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuItems = [
+    { title: "WATCHES", path: "/watches" },
+    { title: "WARRANTY & SERVIES", path: "/warranty" },
+    { title: "STORES", path: "/stores" },
+  ];
   return (
-    <nav className="flex flex-row justify-between w-full h-10  p-10 items-center ">
-      <div className="flex flex-row  justify-center items-center gap-2">
-        <Link to="/" className=" font-headerTitle text-2xl">
-          WATCH FUSION
-        </Link>
-      </div>
-      <div className=" hidden md:flex  font-light text-sm">
-        <ul className="flex flex-row gap-10">
-          <li>
-            <NavLink to="/watches">WATCHES</NavLink>
-          </li>
-          <li>
-            <NavLink to="/warranty">WARRANTY & SERVICE</NavLink>
-          </li>
-          <li>
-            <NavLink to="/stores">STORES</NavLink>
-          </li>
-        </ul>
-      </div>
-      <div className="flex flex-row gap-10 text-sm ">
+    <Navbar onMenuOpenChange={setIsMenuOpen} maxWidth="full">
+      <NavbarContent>
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="sm:hidden"
+        />
+        <NavbarBrand className=" text-left">
+          <Link to="/" className=" font-headerTitle text-md md:text-2xl ">
+            WATCH FUSION
+          </Link>
+        </NavbarBrand>
+      </NavbarContent>
+
+      <NavbarContent className="hidden sm:flex gap-4 " justify="center">
+        <NavbarItem>
+          <NavLink to="/watches">WATCHES</NavLink>
+        </NavbarItem>
+        <NavbarItem>
+          <NavLink to="/warranty">WARRANTY & SERVIES</NavLink>
+        </NavbarItem>
+        <NavbarItem>
+          <NavLink to="/stores">STORES</NavLink>
+        </NavbarItem>
+      </NavbarContent>
+
+      <NavbarContent justify="end">
         <Settings />
-        <div className="flex flex-row  ">
-          <Badge content="5" color="default" placement="bottom-left">
-            <CiHeart size={30} />
-          </Badge>
-          <Badge content="5" color="default" placement="bottom-left">
-            <MdOutlineShoppingBag size={30} color="" />
-          </Badge>
-        </div>
-      </div>
-    </nav>
+        <Badge content="5" placement="bottom-left">
+          <CiHeart size={30} className=" cursor-pointer" />
+        </Badge>
+        <Badge content="5" placement="bottom-left">
+          <LiaShoppingBagSolid size={30} className=" cursor-pointer" />
+        </Badge>
+      </NavbarContent>
+      <NavbarMenu>
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item}-${index}`}>
+            <NavLink className="w-full" to={item.path}>
+              {item.title}
+            </NavLink>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
+    </Navbar>
   );
 };
 

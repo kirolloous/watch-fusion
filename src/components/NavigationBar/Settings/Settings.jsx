@@ -1,23 +1,16 @@
 import React from "react";
-
+import { Select, SelectItem } from "@nextui-org/react";
 const Settings = () => {
   return (
-    <div className="hidden md:flex flex-row gap-2">
-      <select
-        name="currency"
-        className=" bg-gray-500 text-white w-fit h-fit text-center rounded-full p-2  cursor-pointer border-none"
-      >
-        <option value="eng">EUR</option>
-        <option value="eng">USD</option>
-      </select>
-
-      <select
-        name="language"
-        className=" bg-gray-500 text-white w-fit h-fit text-center rounded-full p-2  cursor-pointer border-none"
-      >
-        <option value="eng">ENG</option>
-        <option value="eng">AR</option>
-      </select>
+    <div className="hidden md:flex flex-row gap-2 ">
+      <Select defaultSelectedKeys={["EUR"]} radius="full" className="w-24">
+        <SelectItem key="EUR">EUR</SelectItem>
+        <SelectItem>USD</SelectItem>
+      </Select>
+      <Select defaultSelectedKeys={["ENG"]} radius="full" className="w-24">
+        <SelectItem key="ENG">ENG</SelectItem>
+        <SelectItem>AR</SelectItem>
+      </Select>
     </div>
   );
 };

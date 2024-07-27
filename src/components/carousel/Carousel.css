@@ -1,0 +1,11 @@
+.carousel-height {
+    height: calc(100vh - 90px);
+}
+
+.css-flex-1{
+    flex: 1;
+}
+
+.css-flex-2{
+    flex: 2;
+}
